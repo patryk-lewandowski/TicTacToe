@@ -1,9 +1,60 @@
+.title {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 5rem;
+    text-decoration: underline;
+    letter-spacing: 2px;
+    font-family: 'Sriracha', cursive;
+}
+
 .board {
+    display: flex;
+    flex-wrap: wrap;
     position: absolute;
+    padding: 8px;
     top: 50%;
     left: 50%;
-    width: 60vh;
-    height: 60vh;
+    width: 70vh;
+    height: 70vh;
     transform: translate(-50%, -50%);
-    box-shadow: 1px 1px 1px 1px #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px -2px #555;
+    font-size: 0;
+
+    &__field {
+        width: 33.3%;
+        height: 33.3%;
+
+        &:nth-of-type(2) {
+            border-right: $border-thickness solid $border-color;
+            border-left: $border-thickness solid $border-color;
+            border-bottom: $border-thickness solid $border-color;
+        }
+
+        &:nth-of-type(8) {
+            border-right: $border-thickness solid $border-color;
+            border-left: $border-thickness solid $border-color;
+            border-top: $border-thickness solid $border-color;
+        }
+
+        &:nth-of-type(5) {
+            border-right: $border-thickness solid $border-color;
+            border-left: $border-thickness solid $border-color;
+        }
+
+        &:nth-of-type(1),
+        &:nth-of-type(3) {
+            border-bottom: $border-thickness solid $border-color;
+        }
+
+        &:nth-of-type(7),
+        &:nth-of-type(9) {
+            border-top: $border-thickness solid $border-color;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(238, 238, 238, 0.6);
+        }
+    }
 }
