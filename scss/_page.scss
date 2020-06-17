@@ -4,7 +4,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: 0.95;
+    opacity: 0.8;
     background-color: rgb(60, 255, 11);
     z-index: 10;
     display: none;
@@ -83,11 +83,22 @@
 
         i {
             display: block;
-            font-size: 10rem;
+            font-size: 0.5rem;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: signScale 0.1s linear 1 both;
         }
+    }
+}
+
+@keyframes signScale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(20);
     }
 }

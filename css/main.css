@@ -12,7 +12,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  opacity: 0.95;
+  opacity: 0.8;
   background-color: #3cff0b;
   z-index: 10;
   display: none;
@@ -93,11 +93,35 @@
 
 .board__field i {
   display: block;
-  font-size: 10rem;
+  font-size: 0.5rem;
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  -webkit-animation: signScale 0.1s linear 1 both;
+          animation: signScale 0.1s linear 1 both;
+}
+
+@-webkit-keyframes signScale {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(20);
+            transform: scale(20);
+  }
+}
+
+@keyframes signScale {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(20);
+            transform: scale(20);
+  }
 }
 /*# sourceMappingURL=main.css.map */

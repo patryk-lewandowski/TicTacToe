@@ -11,21 +11,16 @@ const addSign = () => {
                 if ((tableO[fieldNumber] === '') && (tableX[fieldNumber] === '')) {
                     if (counter % 2) {
                         field.innerHTML = '<i class="icon-cancel"></i>'
-                        addToTable(field.dataset.number, 'x');
+                        addToTable(fieldNumber, 'x');
                     } else {
                         field.innerHTML = '<i class="icon-circle-empty"></i>'
-                        addToTable(field.dataset.number, 'o');
+                        addToTable(fieldNumber, 'o');
                     }
                     counter++;
-                    console.log(field.dataset.number);
                 } else {
                     console.log('to pole jest już zajęte');
                 }
-            } else {
-                console.log('koniec gry');
-                gameOver('remis');
             }
-
         })
     })
 }
@@ -41,22 +36,30 @@ const addToTable = (number, sign) => {
 }
 
 const checkIfWin = (table) => {
+    //poziomo
     for (let i = 1; i <= 10; i += 3) {
-        // console.log(`poziomo: ${i},${i+1},${i+2}`);
         if ((table[i] && table[i + 1] && table[i + 2]) === table[0]) {
             console.log(`wygrał ${table[0]}`);
+            // fields.forEach(function (field) {
+            //     if ((field.dataset.number === i) ||
+            //         (field.dataset.number === i + 1) ||
+            //         (field.dataset.number === i + 2)) {
+            //         field.setAttribute('color', 'red');
+            //     }
+            // })
             gameOver(table[0]);
             break;
         }
     }
+    //pionowo
     for (let i = 1; i <= 3; i++) {
-        // console.log(`pionowo: ${i},${i+3},${i+6}`);
         if ((table[i] && table[i + 3] && table[i + 6]) === table[0]) {
             console.log(`wygrał ${table[0]}`);
             gameOver(table[0]);
             break;
         }
     }
+    //na skos
     if ((table[0] === table[1] &&
             table[1] === table[5] &&
             table[5] === table[9]) ||
@@ -66,13 +69,19 @@ const checkIfWin = (table) => {
             table[5] === table[7])) {
         console.log(`wygrał ${table[0]}`);
         gameOver(table[0]);
+    } else if (counter === 9) {
+        console.log('koniec gry');
+        gameOver('remis');
     }
 
 }
 
 const gameOver = (gracz) => {
-    document.querySelector('.winnerH1').textContent = `Zwyciężył gracz: ${gracz}`
-    // document.querySelector('.winner').setAttribute('display', 'block');
+    if (gracz === 'remis') {
+        document.querySelector('.winnerH1').textContent = `Remis!`
+    } else {
+        document.querySelector('.winnerH1').textContent = `Zwyciężył gracz: ${gracz}`
+    }
     document.querySelector('.winner').style.display = 'block';
 }
 
