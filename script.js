@@ -1,4 +1,5 @@
 const fields = document.querySelectorAll('.board__field');
+const infoH1 = document.querySelector('.stats__infoH1');
 let counter = 1;
 let tableX = ['x', '', '', '', '', '', '', '', '', ''];
 let tableO = ['o', '', '', '', '', '', '', '', '', ''];
@@ -77,12 +78,12 @@ const checkIfWin = (table) => {
 }
 
 const gameOver = (gracz) => {
+    document.querySelector('.board__disabled').style.display = 'block';
     if (gracz === 'remis') {
-        document.querySelector('.winnerH1').textContent = `Remis!`
+        dinfoH1.textContent = `Remis!`
     } else {
-        document.querySelector('.winnerH1').textContent = `Zwyciężył gracz: ${gracz}`
+        infoH1.textContent = `Zwyciężył gracz: ${gracz}`
     }
-    document.querySelector('.winner').style.display = 'block';
 }
 
 
