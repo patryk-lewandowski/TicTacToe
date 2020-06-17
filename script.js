@@ -12,6 +12,7 @@ let tableO = [];
 
 const newGame = () => {
     infoH1.style.color = 'rgb(43, 184, 8)';
+    infoH1.innerHTML = '';
     fields.forEach(function (field) {
         field.innerHTML = "";
     })
@@ -57,10 +58,12 @@ const addToTable = (number, sign) => {
 }
 
 const checkIfWin = (table) => {
+    let winner = false;
     //poziomo
     for (let i = 1; i <= 10; i += 3) {
         if ((table[i] && table[i + 1] && table[i + 2]) === table[0]) {
-            console.log(`wygrał ${table[0]}`);
+            // console.log(`wygrał ${table[0]}`);
+            winner = true;
             gameOver(table[0]);
             break;
         }
@@ -68,7 +71,8 @@ const checkIfWin = (table) => {
     //pionowo
     for (let i = 1; i <= 3; i++) {
         if ((table[i] && table[i + 3] && table[i + 6]) === table[0]) {
-            console.log(`wygrał ${table[0]}`);
+            // console.log(`wygrał ${table[0]}`);
+            winner = true;
             gameOver(table[0]);
             break;
         }
@@ -81,27 +85,29 @@ const checkIfWin = (table) => {
         (table[0] === table[3] &&
             table[3] === table[5] &&
             table[5] === table[7])) {
-        console.log(`wygrał ${table[0]}`);
+        // console.log(`wygrał ${table[0]}`);
+        winner = true;
         gameOver(table[0]);
-    } else if (counter === 9) {
-        console.log('koniec gry');
+    }
+
+    if (counter === 9 && winner === false) {
         counter = 1;
-        gameOver('remis');
+        gameOver('draw');
     }
 
 }
 
 const gameOver = (gracz) => {
     document.querySelector('.board__disabled').style.display = 'block';
-    if (gracz === 'remis') {
-        infoH1.textContent = `Remis!`
+    if (gracz === 'draw') {
+        infoH1.textContent = `Draw!`
         infoH1.style.color = 'red';
         updateStats('draw');
     } else if (gracz === 'x') {
-        infoH1.textContent = `Zwyciężył gracz: X`
+        infoH1.textContent = `Player X won!`
         updateStats('x');
     } else {
-        infoH1.textContent = `Zwyciężył gracz: O`
+        infoH1.textContent = `Player O won!`
         updateStats('o');
     }
 }

@@ -159,14 +159,16 @@ body {
 
 .stats__buttons button {
   width: 50%;
-  border: 2px solid black;
+  border: none;
+  border-bottom: 2px solid black;
   border-radius: 5px;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: 700;
   background-color: #FFF;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  outline: none;
 }
 
 .stats__buttons button:hover {
