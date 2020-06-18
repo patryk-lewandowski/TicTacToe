@@ -5,11 +5,12 @@ const winsO = document.querySelector('.stats__winsO');
 const draws = document.querySelector('.stats__draws');
 const resetButton = document.querySelector('.stats__buttons-reset')
 const newGameButton = document.querySelector('.stats__buttons-newGame')
+const currentPlayer = document.querySelector('.stats__whoPlays');
 let counter = 1;
 let stats = [0, 0, 0]; //[X,O,D];
 let tableX = [];
 let tableO = [];
-
+let gameCounter = 0;
 const newGame = () => {
     infoH1.style.color = 'rgb(43, 184, 8)';
     infoH1.innerHTML = '';
@@ -17,6 +18,7 @@ const newGame = () => {
         field.innerHTML = "";
     })
     counter = 1;
+    gameCounter++;
     tableX = ['x', '', '', '', '', '', '', '', '', ''];
     tableO = ['o', '', '', '', '', '', '', '', '', ''];
     document.querySelector('.board__disabled').style.display = 'none';
@@ -25,21 +27,29 @@ const newGame = () => {
 const addSign = () => {
     fields.forEach(function (field) {
         field.addEventListener('click', function () {
+            infoH1.style.color = 'rgb(43, 184, 8)';
             infoH1.innerHTML = '';
             const fieldNumber = field.dataset.number;
-            console.log(counter)
+            console.log(gameCounter)
             // console.log(fieldNumber)
             if (counter < 10) {
                 if ((tableO[fieldNumber] === '') && (tableX[fieldNumber] === '')) {
                     if (counter % 2) {
-                        field.innerHTML = '<i class="icon-cancel"></i>'
-                        addToTable(fieldNumber, 'x');
+                        if (gameCounter % 2) {
+                            addX(field, fieldNumber);
+                        } else {
+                            addO(field, fieldNumber);
+                        }
                     } else {
-                        field.innerHTML = '<i class="icon-circle-empty"></i>'
-                        addToTable(fieldNumber, 'o');
+                        if (gameCounter % 2) {
+                            addO(field, fieldNumber);
+                        } else {
+                            addX(field, fieldNumber);
+                        }
                     }
                     counter++;
                 } else {
+                    infoH1.style.color = 'red';
                     infoH1.innerHTML = 'to pole jest już zajęte';
                 }
             }
@@ -133,12 +143,25 @@ resetButton.addEventListener('click', function () {
     winsO.innerHTML = stats[1];
     draws.innerHTML = stats[2];
     infoH1.innerHTML = '';
+    currentPlayer.innerHTML = '<i class="icon-cancel"></i>';
+    gameCounter = 0;
     newGame();
 })
 
 newGameButton.addEventListener('click', function () {
     newGame();
 })
+
+const addO = (field, fieldNumber) => {
+    field.innerHTML = '<i class="icon-circle-empty"></i>'
+    currentPlayer.innerHTML = '<i class="icon-cancel"></i>';
+    addToTable(fieldNumber, 'o');
+}
+const addX = (field, fieldNumber) => {
+    field.innerHTML = '<i class="icon-cancel"></i>'
+    currentPlayer.innerHTML = '<i class="icon-circle-empty"></i>';
+    addToTable(fieldNumber, 'x');
+}
 
 addSign();
 newGame();
